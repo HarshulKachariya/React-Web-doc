@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { IoIosRefresh } from "react-icons/io";
 import CodeSnippets from "../../CodeSnippets";
 import MarkdownEditor from "./Preview";
+import CodePreview, { RefreshButton, Span } from "../../PreviewBox";
 
 const LazyComponent = () => {
   const [preview, setPreview] = useState<boolean>(false);
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4 text-[#282c34]">lazy</h1>
-      <p className="text-xl mb-4 w-[80%]">
-        <span className="text-red-500"> lazy </span> lets you defer loading
-        component’s code until it is rendered for the first time.
+      <h1 className="title">lazy</h1>
+      <p className="text-xl mb-4 ">
+        <Span> lazy </Span> lets you defer loading component’s code until it is
+        rendered for the first time.
       </p>
 
       <CodeSnippets
@@ -25,8 +25,8 @@ const LazyComponent = () => {
 
       <div className="mt-5">
         <p className="text-xl mb-2 ">
-          Call <span className="text-red-500"> lazy </span> outside your
-          components to declare a lazy-loaded React component:
+          Call <Span> lazy </Span> outside your components to declare a
+          lazy-loaded React component:
         </p>
       </div>
       <div className="bg-gray-200 rounded-lg py-4 mb-4">
@@ -43,24 +43,22 @@ const LazyComponent = () => {
           <p className="text-xl mb-2">
             <strong className="text-red-500"> load: </strong> A function that
             returns a Promise or another thenable (a Promise-like object with a
-            then method). React will not call{" "}
-            <span className="text-red-500"> load</span> until the first time you
-            attempt to render the returned component. After React first calls
-            <span className="text-red-500"> load </span>, it will wait for it to
-            resolve, and then render the resolved value’s .default as a React
-            component. Both the returned Promise and the Promise’s resolved
-            value will be cached, so React will not call{" "}
-            <span className="text-red-500"> load </span> more than once. If the
+            then method). React will not call <Span> load</Span> until the first
+            time you attempt to render the returned component. After React first
+            calls
+            <Span> load </Span>, it will wait for it to resolve, and then render
+            the resolved value’s .default as a React component. Both the
+            returned Promise and the Promise’s resolved value will be cached, so
+            React will not call <Span> load </Span> more than once. If the
             Promise rejects, React will throw the rejection reason for the
             nearest Error Boundary to handle.
           </p>
 
           <h2 className="text-3xl font-bold mb-2 text-[#282c34]">Return :</h2>
           <p className="text-xl mb-2 ">
-            <span className="text-red-500"> lazy </span> lazy returns a React
-            component you can render in your tree. While the code for the lazy
-            component is still loading, attempting to render it will suspend.
-            Use{" "}
+            <Span> lazy </Span> lazy returns a React component you can render in
+            your tree. While the code for the lazy component is still loading,
+            attempting to render it will suspend. Use{" "}
             <span className="text-emerald-600 font-semibold">{`<Suspense>`}</span>{" "}
             to display a loading indicator while it’s loading.
           </p>
@@ -186,30 +184,20 @@ export default function MarkdownPreview({ markdown }) {
 }`}
         />
 
-        <div className="col-span-1 p-2 bg-gray-400 rounded-lg mt-5">
+        <CodePreview className="mt-5">
           {!preview ? (
-            <div>
-              <button
-                className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                onClick={() => setPreview(true)}
-              >
-                Preview of code
-              </button>
-            </div>
+            <button
+              className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
+              onClick={() => setPreview(true)}
+            >
+              Preview of code
+            </button>
           ) : (
-            <div className="relative top-1 flex flex-col gap-3 h-60 p-5">
+            <RefreshButton onClick={() => setPreview(false)}>
               <MarkdownEditor />
-              <div className="absolute top-1 right-2">
-                <button
-                  className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => setPreview(false)}
-                >
-                  <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                </button>
-              </div>
-            </div>
+            </RefreshButton>
           )}
-        </div>
+        </CodePreview>
       </div>
     </div>
   );

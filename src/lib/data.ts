@@ -115,7 +115,7 @@ export const Apis = [
 ];
 export const StateManagement = [
   {
-    name: "Redux Toolkit / React Redux",
+    name: "Redux Toolkit",
     slug: "/state-management/reduxTookit",
   },
 ];
@@ -127,5 +127,13 @@ export const reactTypes = [
   {
     name: "Props",
     slug: "/react/props",
+  },
+  {
+    name: "React Router",
+    slug: "/react/router",
+  },
+  {
+    name: "Dynamic Routes",
+    slug: "/react/dynamic-routes",
   },
 ];

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoIosRefresh } from "react-icons/io";
 import CodeSnippets from "../CodeSnippets";
+import CodePreview, { RefreshButton } from "../PreviewBox";
 
 const Props = () => {
   const [preview, setPreview] = useState<boolean>(false);
@@ -8,7 +9,7 @@ const Props = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4 text-[#282c34]">React Props</h1>
+      <h1 className="title">React Props</h1>
 
       <p className="flex flex-col gap-2 text-xl mb-4">
         <span> Props are arguments passed into React components.</span>
@@ -45,41 +46,34 @@ const Props = () => {
   export default MyComp;`}
         />
 
-        <div className="col-span-1 p-2 bg-gray-400 rounded-lg ">
+        <CodePreview className="mt-5">
           {!preview ? (
-            <div>
-              <div className="space-x-3 ">
-                <input
-                  type="text"
-                  value={value}
-                  onChange={(e) => setvalue(e.target.value)}
-                  className="p-2 rounded-md hover:shadow-md outline-none"
-                />
-                <button
-                  className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => setPreview(true)}
-                >
-                  Preview of code
-                </button>
-              </div>
+            <div className="space-x-3 ">
+              <input
+                type="text"
+                value={value}
+                onChange={(e) => setvalue(e.target.value)}
+                className="p-2 rounded-md hover:shadow-md outline-none"
+              />
+              <button
+                className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
+                onClick={() => setPreview(true)}
+              >
+                Preview of code
+              </button>
             </div>
           ) : (
-            <div className="relative top-1 min-h-16">
+            <RefreshButton
+              className="relative top-1 min-h-16"
+              onClick={() => {
+                setvalue("");
+                setPreview(false);
+              }}
+            >
               <p className="text-xl">Hi, I am a {value} car!</p>
-              <div className="absolute top-1 right-2   ">
-                <button
-                  className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => {
-                    setvalue("");
-                    setPreview(false);
-                  }}
-                >
-                  <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                </button>
-              </div>
-            </div>
+            </RefreshButton>
           )}
-        </div>
+        </CodePreview>
       </div>
     </div>
   );

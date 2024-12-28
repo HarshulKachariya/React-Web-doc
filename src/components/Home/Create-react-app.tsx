@@ -1,6 +1,7 @@
 import CodeSnippets from "./../CodeSnippets/index";
 
 import reactApp from "../../assets/react_create_react_app.png";
+import { Span } from "../PreviewBox";
 
 const CreateReactApp = () => {
   return (
@@ -63,8 +64,7 @@ const CreateReactApp = () => {
             commands:
           </p>
           <div className="text-xl">
-            <span className="text-red-500">npm start</span> or{" "}
-            <span className="text-red-500">yarn start</span>
+            <Span>npm start</Span> or <Span>yarn start</Span>
           </div>
         </div>
         <p className="text-gray-700 my-4 text-xl">

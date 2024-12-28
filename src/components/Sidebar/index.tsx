@@ -75,7 +75,7 @@ const Sidebar = ({ setIsOpen }: any) => {
       </div>
       <div>
         <NavLink
-          to=""
+          to="#"
           className="text-xl font-bold my-4"
           onClick={() => setIsOpen(false)}
         >

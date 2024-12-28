@@ -4,44 +4,75 @@ const App = lazy(() => import("./App.tsx"));
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Homepage from "./components/Home/index.tsx";
-import GetStarted from "./components/Home/GetStarted.tsx";
+const DynamicRoutes = lazy(
+  () => import("./components/Router/DynamicRoutes.tsx")
+);
+const GetStarted = lazy(() => import("./components/Home/GetStarted.tsx"));
 
-import CuatomHook from "./components/Hooks/CustomHooks/CustomHook.tsx";
+const CuatomHook = lazy(
+  () => import("./components/Hooks/CustomHooks/CustomHook.tsx")
+);
 
-import UseEffect from "./components/Hooks/useEffect.tsx";
-import UseMemo from "./components/Hooks/useMemo.tsx";
-import UseRef from "./components/Hooks/useRef.tsx";
-import UseCallback from "./components/Hooks/useCallback.tsx";
-import UseContext from "./components/Hooks/useContext.tsx";
-import UseReducer from "./components/Hooks/useReducer.tsx";
-import UseState from "./components/Hooks/useState.tsx";
-import CreateReactApp from "./components/Home/Create-react-app.tsx";
-import CreateViteApp from "./components/Home/Create-vite-app.tsx";
-import OnBlurEvent from "./components/Events/onBlur.tsx";
-import OnChangeEvent from "./components/Events/onChange.tsx";
-import OnFocusEvent from "./components/Events/onFocus.tsx";
-import RadioButtonEvent from "./components/Events/radiobuttonevent.tsx";
-import CheckboxEvent from "./components/Events/checkboxevent.tsx";
-import InputValue from "./components/other/inputValue.tsx";
-import RadioButtonValue from "./components/other/radiobuttonvalue.tsx";
-import CheckboxDefaultChecked from "./components/other/CheckboxDefaultChecked.tsx";
-import InputDefaultValue from "./components/other/inputDefaultvalue.tsx";
-import RadioButtonDefaultValue from "./components/other/RadioButtonDefaultValue.tsx";
-import CheckboxChecked from "./components/other/checkboxchecked.tsx";
-import WebWorkerComponent from "./components/other/webworker";
-import WindowWidthComponent from "./components/Hooks/CustomHooks/WindowWidthComponent.tsx";
-import Tailwind from "./components/Styles/Tailwind.tsx";
-import MemoComponent from "./components/Hooks/memo.tsx";
-import LazyComponent from "./components/APIs/Lazy/Lazy.tsx";
-import ReduxToolKit from "./components/StateManagement/ReduxToolKit.tsx";
-import Components from "./components/React/Components.tsx";
-import Props from "./components/React/Props.tsx";
+const UseEffect = lazy(() => import("./components/Hooks/useEffect.tsx"));
+const UseMemo = lazy(() => import("./components/Hooks/useMemo.tsx"));
+const UseRef = lazy(() => import("./components/Hooks/useRef.tsx"));
+const UseCallback = lazy(() => import("./components/Hooks/useCallback.tsx"));
+const UseContext = lazy(() => import("./components/Hooks/useContext.tsx"));
+const UseReducer = lazy(() => import("./components/Hooks/useReducer.tsx"));
+const UseState = lazy(() => import("./components/Hooks/useState.tsx"));
+const CreateReactApp = lazy(
+  () => import("./components/Home/Create-react-app.tsx")
+);
+const CreateViteApp = lazy(
+  () => import("./components/Home/Create-vite-app.tsx")
+);
+const OnBlurEvent = lazy(() => import("./components/Events/onBlur.tsx"));
+const OnChangeEvent = lazy(() => import("./components/Events/onChange.tsx"));
+const OnFocusEvent = lazy(() => import("./components/Events/onFocus.tsx"));
+const RadioButtonEvent = lazy(
+  () => import("./components/Events/radiobuttonevent.tsx")
+);
+const CheckboxEvent = lazy(
+  () => import("./components/Events/checkboxevent.tsx")
+);
+const InputValue = lazy(() => import("./components/other/inputValue.tsx"));
+const RadioButtonValue = lazy(
+  () => import("./components/other/radiobuttonvalue.tsx")
+);
+const CheckboxDefaultChecked = lazy(
+  () => import("./components/other/CheckboxDefaultChecked.tsx")
+);
+const InputDefaultValue = lazy(
+  () => import("./components/other/inputDefaultvalue.tsx")
+);
+const RadioButtonDefaultValue = lazy(
+  () => import("./components/other/RadioButtonDefaultValue.tsx")
+);
+const CheckboxChecked = lazy(
+  () => import("./components/other/checkboxchecked.tsx")
+);
+const WebWorkerComponent = lazy(() => import("./components/other/webworker"));
+const WindowWidthComponent = lazy(
+  () => import("./components/Hooks/CustomHooks/WindowWidthComponent.tsx")
+);
+const Tailwind = lazy(() => import("./components/Styles/Tailwind.tsx"));
+const MemoComponent = lazy(() => import("./components/Hooks/memo.tsx"));
+const LazyComponent = lazy(() => import("./components/APIs/Lazy/Lazy.tsx"));
+const ReduxToolKit = lazy(
+  () => import("./components/StateManagement/ReduxToolKit.tsx")
+);
+const Components = lazy(() => import("./components/React/Components.tsx"));
+const Props = lazy(() => import("./components/React/Props.tsx"));
+const ReactRouter = lazy(() => import("./components/Router/index.tsx"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <Suspense fallback={<>Laoding...</>}>
+        <App />
+      </Suspense>
+    ),
     children: [
       {
         path: "/create-react-app",
@@ -70,122 +101,235 @@ const router = createBrowserRouter([
       {
         path: "/hooks/useState",
         element: (
-          // <Suspense fallback={<>Laoding...</>}>
-          <UseState />
-          // </Suspense>
+          <Suspense fallback={<>Laoding...</>}>
+            <UseState />
+          </Suspense>
         ),
       },
       {
         path: "/hooks/customHooks",
         element: (
-          // <Suspense fallback={<>Laoding...</>}>
-          <CuatomHook />
-          // </Suspense>
+          <Suspense fallback={<>Laoding...</>}>
+            <CuatomHook />
+            //
+          </Suspense>
         ),
       },
       {
         path: "/output/customHooks",
         element: (
-          // <Suspense fallback={<>Laoding...</>}>
-          <WindowWidthComponent />
-          // </Suspense>
+          <Suspense fallback={<>Laoding...</>}>
+            <WindowWidthComponent />
+          </Suspense>
         ),
       },
       {
         path: "/hooks/useEffect",
-        element: <UseEffect />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <UseEffect />
+          </Suspense>
+        ),
       },
       {
         path: "/hooks/useMemo",
-        element: <UseMemo />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <UseMemo />
+          </Suspense>
+        ),
       },
       {
         path: "/hooks/useRef",
-        element: <UseRef />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <UseRef />
+          </Suspense>
+        ),
       },
       {
         path: "/hooks/useCallback",
-        element: <UseCallback />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <UseCallback />
+          </Suspense>
+        ),
       },
       {
         path: "/hooks/useContext",
-        element: <UseContext />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <UseContext />
+          </Suspense>
+        ),
       },
       {
         path: "/hooks/useReducer",
-        element: <UseReducer />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <UseReducer />
+          </Suspense>
+        ),
       },
       {
         path: "/apis/lazy",
-        element: <LazyComponent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <LazyComponent />
+          </Suspense>
+        ),
       },
       {
         path: "/apis/memo",
-        element: <MemoComponent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <MemoComponent />
+          </Suspense>
+        ),
       },
       {
         path: "/events/onBlur",
-        element: <OnBlurEvent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <OnBlurEvent />
+          </Suspense>
+        ),
       },
       {
         path: "/events/onChange",
-        element: <OnChangeEvent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <OnChangeEvent />
+          </Suspense>
+        ),
       },
       {
         path: "/events/onFocus",
-        element: <OnFocusEvent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <OnFocusEvent />
+          </Suspense>
+        ),
       },
       {
         path: "/events/RadioButtonEvent",
-        element: <RadioButtonEvent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <RadioButtonEvent />
+          </Suspense>
+        ),
       },
       {
         path: "/events/CheckboxEvent",
-        element: <CheckboxEvent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <CheckboxEvent />
+          </Suspense>
+        ),
       },
       {
         path: "/other/webworker",
-        element: <WebWorkerComponent />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <WebWorkerComponent />
+          </Suspense>
+        ),
       },
       {
         path: "/other/inputValue",
-        element: <InputValue />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <InputValue />
+          </Suspense>
+        ),
       },
       {
         path: "/other/RadioButtonValue",
-        element: <RadioButtonValue />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <RadioButtonValue />
+          </Suspense>
+        ),
       },
       {
         path: "/other/CheckboxDefaultChecked",
-        element: <CheckboxDefaultChecked />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <CheckboxDefaultChecked />
+          </Suspense>
+        ),
       },
       {
         path: "/other/inputDefaultvalue",
-        element: <InputDefaultValue />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <InputDefaultValue />
+          </Suspense>
+        ),
       },
       {
         path: "/other/RadioButtonDefaultValue",
-        element: <RadioButtonDefaultValue />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <RadioButtonDefaultValue />
+          </Suspense>
+        ),
       },
       {
         path: "/other/Checkboxchecked",
-        element: <CheckboxChecked />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <CheckboxChecked />
+          </Suspense>
+        ),
       },
       {
         path: "/style/tailwindcss",
-        element: <Tailwind />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <Tailwind />
+          </Suspense>
+        ),
       },
       {
         path: "/state-management/reduxTookit",
-        element: <ReduxToolKit />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <ReduxToolKit />
+          </Suspense>
+        ),
       },
       {
         path: "/react/components",
-        element: <Components />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <Components />
+          </Suspense>
+        ),
       },
       {
         path: "/react/props",
-        element: <Props />,
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <Props />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/react/router",
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <ReactRouter />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/react/dynamic-routes",
+        element: (
+          <Suspense fallback={<>Laoding...</>}>
+            <DynamicRoutes />
+          </Suspense>
+        ),
       },
     ],
   },

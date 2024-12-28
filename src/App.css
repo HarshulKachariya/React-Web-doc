@@ -1,3 +1,7 @@
 .sidebar::-webkit-scrollbar {
   display: none;
 }
+
+.title {
+  @apply text-3xl font-bold mb-4 text-[#282c34] !important;
+}

@@ -7,7 +7,7 @@ export default function MarkdownEditor() {
   const [showPreview, setShowPreview] = useState(false);
   const [markdown, setMarkdown] = useState("Hello, **world**!");
   return (
-    <>
+    <div className="flex flex-col gap-3">
       <textarea
         value={markdown}
         onChange={(e) => setMarkdown(e.target.value)}
@@ -28,7 +28,7 @@ export default function MarkdownEditor() {
           <MarkdownPreview markdown={markdown} />
         </Suspense>
       )}
-    </>
+    </div>
   );
 }
 

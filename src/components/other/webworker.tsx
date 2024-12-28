@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IoIosRefresh } from "react-icons/io";
 import CodeSnippets from "../CodeSnippets";
+import CodePreview, { RefreshButton } from "../PreviewBox";
 
 const webWorker = () => {
   const [number, setNumber] = useState(0);
@@ -38,7 +39,7 @@ const webWorker = () => {
       <h1 className="text-3xl font-bold mb-4">
         React Web Workers - Fibonacci Example
       </h1>
-      <p className="text-xl mb-4 w-[80%]">
+      <p className="text-xl mb-4 ">
         Web Workers in React can be used to perform complex computations, like
         calculating the Fibonacci sequence, in the background to avoid blocking
         the main thread.
@@ -112,7 +113,8 @@ export default FibonacciWorkerExample;
 `}
           />
         </div>
-        <div className="col-span-1 p-2 bg-gray-400 rounded-lg my-5 ">
+
+        <CodePreview className="mt-5 ">
           {!preview ? (
             <div className="space-x-3 ">
               <input
@@ -128,26 +130,15 @@ export default FibonacciWorkerExample;
               </button>
             </div>
           ) : (
-            <div className="relative top-1 min-h-32">
-              <div className="flex flex-col gap-2">
-                <p className="text-lg font-bold">
-                  {" "}
-                  Result of Fibonacci Number :{" "}
-                  {!!result ? result : "Entered Number is Not Fibonacci"}
-                </p>
-
-                <div className="absolute top-1 right-2 ">
-                  <button
-                    className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                    onClick={handleRefresh}
-                  >
-                    <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                  </button>
-                </div>
-              </div>
-            </div>
+            <RefreshButton className="min-h-32" onClick={handleRefresh}>
+              <p className="text-lg font-bold">
+                {" "}
+                Result of Fibonacci Number :{" "}
+                {!!result ? result : "Entered Number is Not Fibonacci"}
+              </p>
+            </RefreshButton>
           )}
-        </div>
+        </CodePreview>
       </div>
     </div>
   );

@@ -20,7 +20,6 @@ const CodeSnippets = ({
         setTimeout(() => {
           setCopied(false);
         }, 1000);
-        console.log("Code copied successfully!");
       },
       (err) => {
         setCopied(false);

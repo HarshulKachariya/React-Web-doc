@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoIosRefresh } from "react-icons/io";
 import CodeSnippets from "../CodeSnippets";
+import CodePreview, { RefreshButton, Span } from "../PreviewBox";
 
 const MemoComponent = () => {
   const [preview, setPreview] = useState<boolean>(false);
@@ -13,10 +14,10 @@ const MemoComponent = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4 text-[#282c34]">memo</h1>
-      <p className="text-xl mb-4 w-[80%]">
-        <span className="text-red-500"> memo</span> lets you skip re-rendering a
-        component when its props are unchanged.
+      <h1 className="title">memo</h1>
+      <p className="text-xl mb-4 ">
+        <Span> memo</Span> lets you skip re-rendering a component when its props
+        are unchanged.
       </p>
 
       <CodeSnippets
@@ -31,12 +32,11 @@ const MemoComponent = () => {
 
       <div className="mt-5">
         <p className="text-xl mb-2 ">
-          Wrap a component in <span className="text-red-500"> memo</span> to get
-          a memoized version of that component. This memoized version of your
-          component will usually not be re-rendered when its parent component is
-          re-rendered as long as its props have not changed. But React may still
-          re-render it: memoization is a performance optimization, not a
-          guarantee.
+          Wrap a component in <Span> memo</Span> to get a memoized version of
+          that component. This memoized version of your component will usually
+          not be re-rendered when its parent component is re-rendered as long as
+          its props have not changed. But React may still re-render it:
+          memoization is a performance optimization, not a guarantee.
         </p>
       </div>
       <div className="bg-gray-200 rounded-lg py-4 mb-4">
@@ -70,10 +70,10 @@ const SomeComponent = memo(function SomeComponent(props) {
           </p>
           <h2 className="text-3xl font-bold mb-2 text-[#282c34]">Return :</h2>
           <p className="text-xl mb-2 ">
-            <span className="text-red-500"> memo</span> returns a new React
-            component. It behaves the same as the component provided to memo
-            except that React will not always re-render it when its parent is
-            being re-rendered unless its props have changed.
+            <Span> memo</Span> returns a new React component. It behaves the
+            same as the component provided to memo except that React will not
+            always re-render it when its parent is being re-rendered unless its
+            props have changed.
           </p>
         </div>
         <h2 className="text-3xl font-bold mb-2 text-[#282c34]">Usage :</h2>
@@ -166,7 +166,8 @@ function GreetingSelector({ value, onChange }) {
 `}
           />
         </div>
-        <div className="col-span-1 p-2 bg-gray-400 rounded-lg mt-5">
+
+        <CodePreview className="mt-5">
           {!preview ? (
             <div>
               <button
@@ -177,67 +178,64 @@ function GreetingSelector({ value, onChange }) {
               </button>
             </div>
           ) : (
-            <div className="relative top-1 flex flex-col gap-3">
-              <div className="flex flex-col gap-2">
-                <div>
-                  <label className="text-lg mr-6">Name:</label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="p-2 rounded-md hover:shadow-md outline-none"
-                  />
+            <RefreshButton
+              className="flex flex-col gap-3"
+              onClick={() => {
+                setSelectedValue("option1");
+                setName("");
+                setAddress("");
+              }}
+            >
+              <>
+                <div className="flex flex-col gap-2">
+                  <div>
+                    <label className="text-lg mr-6">Name:</label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="p-2 rounded-md hover:shadow-md outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-lg mr-4">Address:</label>
+                    <input
+                      type="text"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      className="p-2 rounded-md hover:shadow-md outline-none"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="text-lg mr-4">Address:</label>
-                  <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className="p-2 rounded-md hover:shadow-md outline-none"
-                  />
+                <p className="text-xl font-bold">
+                  {selectedValue === "option2"
+                    ? `Hello and welcome, ${name}!`
+                    : `Hello! ${name}`}
+                </p>
+                <div className="flex flex-col gap-2">
+                  <label className="text-lg ">
+                    <input
+                      type="radio"
+                      value="option1"
+                      checked={selectedValue === "option1"}
+                      onChange={handleChange}
+                    />
+                    Regular greeting
+                  </label>
+                  <label className="text-lg ">
+                    <input
+                      type="radio"
+                      value="option2"
+                      checked={selectedValue === "option2"}
+                      onChange={handleChange}
+                    />
+                    Enthusiastic greeting
+                  </label>
                 </div>
-              </div>
-              <p className="text-xl font-bold">
-                {selectedValue === "option2"
-                  ? `Hello and welcome, ${name}!`
-                  : `Hello! ${name}`}
-              </p>
-              <div className="flex flex-col gap-2">
-                <label className="text-lg ">
-                  <input
-                    type="radio"
-                    value="option1"
-                    checked={selectedValue === "option1"}
-                    onChange={handleChange}
-                  />
-                  Regular greeting
-                </label>
-                <label className="text-lg ">
-                  <input
-                    type="radio"
-                    value="option2"
-                    checked={selectedValue === "option2"}
-                    onChange={handleChange}
-                  />
-                  Enthusiastic greeting
-                </label>
-              </div>
-              <div className="absolute top-1 right-2   ">
-                <button
-                  className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => {
-                    setSelectedValue("option1");
-                    setName("");
-                    setAddress("");
-                  }}
-                >
-                  <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                </button>
-              </div>
-            </div>
+              </>
+            </RefreshButton>
           )}
-        </div>
+        </CodePreview>
       </div>
     </div>
   );

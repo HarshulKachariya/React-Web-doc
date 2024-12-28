@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { IoIosRefresh } from "react-icons/io";
 import CodeSnippets from "../CodeSnippets";
+import CodePreview, { RefreshButton, Span } from "../PreviewBox";
 
 const UseState = () => {
   const [preview, setPreview] = useState<boolean>(false);
@@ -11,14 +11,12 @@ const UseState = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4 text-[#282c34]">
-        React useState Hook
-      </h1>
-      <p className="text-xl mb-4 w-[80%]">
-        The React <span className="text-red-500">useState</span> Hook allows us
-        to track state in a function component. State generally refers to data
-        or properties that need to be tracking in an application.
+    <section>
+      <h1 className="title">React useState Hook</h1>
+      <p className="text-xl mb-4">
+        The React <Span>useState</Span> Hook allows us to track state in a
+        function component. State generally refers to data or properties that
+        need to be tracking in an application.
       </p>
       <p className="text-xl mb-2 text-[#282c34]">Import useState :</p>
       <CodeSnippets
@@ -27,19 +25,17 @@ const UseState = () => {
       />
       <div className="mt-5">
         <p className="text-xl mb-2 ">
-          The <span className="text-red-500">set</span> function returned by{" "}
-          <span className="text-red-500">useState</span> lets you update the
-          state to a different value and trigger a re-render. You can pass the
-          next state directly, or a function that calculates it from the
-          previous state.
+          The <Span>set</Span> function returned by <Span>useState</Span> lets
+          you update the state to a different value and trigger a re-render. You
+          can pass the next state directly, or a function that calculates it
+          from the previous state.
         </p>
       </div>
       <div className="bg-gray-200 rounded-lg py-4 mb-4">
         <h2 className="text-xl font-bold mb-2 text-[#282c34]">Example:</h2>
         <p className="mb-2 text-lg">
-          At the top of your component,{" "}
-          <span className="text-red-500">import</span> the
-          <span className="text-red-500"> useState</span> Hook.
+          At the top of your component, <Span>import</Span> the
+          <Span> useState</Span> Hook.
         </p>
         <div className="grid grid-cols-1 gap-5 lg:gap-0 lg:grid-cols-2 h-full">
           <div className={`col-span-1 w-full`}>
@@ -62,7 +58,7 @@ export default function Counter() {
       `}
             />
           </div>
-          <div className="col-span-1 p-2 bg-gray-400 rounded-lg ">
+          <CodePreview>
             {!preview ? (
               <div>
                 <span className="text-xl ">
@@ -71,6 +67,7 @@ export default function Counter() {
                 <div className="space-x-3 mt-4">
                   <input
                     type="number"
+                    value={count}
                     onChange={(e) => setCount(Number(e.target.value))}
                     className="p-2 rounded-md hover:shadow-md outline-none"
                   />
@@ -83,29 +80,20 @@ export default function Counter() {
                 </div>
               </div>
             ) : (
-              <div className="relative top-1">
+              <RefreshButton onClick={() => setCount(0)}>
                 <button
                   className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
                   onClick={handleClick}
                 >
                   You pressed me {count} times
                 </button>
-                <div className="absolute top-1 right-2   ">
-                  <button
-                    className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                    onClick={() => setCount(0)}
-                  >
-                    <IoIosRefresh className="text-xl text-white" />
-                  </button>
-                </div>
-              </div>
+              </RefreshButton>
             )}
-          </div>
+          </CodePreview>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 export default UseState;
-//  className="bg-white text-lg p-4 border-l-4 border-black rounded-lg w-[80%]"

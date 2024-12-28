@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { IoIosRefresh } from "react-icons/io";
 import CodeSnippets from "../CodeSnippets";
+import CodePreview, { RefreshButton, Span } from "../PreviewBox";
 
 const UseContext = () => {
   const [preview, setPreview] = useState(false);
@@ -10,11 +10,10 @@ const UseContext = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">React useContext Hook</h1>
-      <p className="text-xl mb-4 w-[80%]">
-        The React <span className="text-red-500">useContext</span> Hook allows
-        you to use the context directly in your functional components. It
-        simplifies accessing context values without needing to use a Context
-        Consumer component.
+      <p className="text-xl mb-4 ">
+        The React <Span>useContext</Span> Hook allows you to use the context
+        directly in your functional components. It simplifies accessing context
+        values without needing to use a Context Consumer component.
       </p>
       <p className="text-lg font-bold mb-2">Import useContext:</p>
       <CodeSnippets
@@ -24,11 +23,9 @@ const UseContext = () => {
       <div className="bg-gray-200 rounded-lg py-4 mb-4">
         <h2 className="text-lg font-bold mb-2">Example:</h2>
         <p className="mb-2 text-lg">
-          To use the <span className="text-red-500">useContext</span> Hook,
-          first create a context using{" "}
-          <span className="text-red-500">React.createContext</span>. Then, use
-          the <span className="text-red-500">useContext</span> Hook to consume
-          the context in a component.
+          To use the <Span>useContext</Span> Hook, first create a context using{" "}
+          <Span>React.createContext</Span>. Then, use the{" "}
+          <Span>useContext</Span> Hook to consume the context in a component.
         </p>
         <CodeSnippets
           codeString={`import { createContext, useContext, useState } from "react";
@@ -63,32 +60,21 @@ function App() {
 export default App;
 `}
         />
-        <div className="col-span-1 p-2 bg-gray-400 rounded-lg my-5 ">
+
+        <CodePreview className="mt-5">
           {!preview ? (
-            <div>
-              <div className="space-x-3 ">
-                <button
-                  className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => setPreview(true)}
-                >
-                  Preview of code
-                </button>
-              </div>
-            </div>
+            <button
+              className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
+              onClick={() => setPreview(true)}
+            >
+              Preview of code
+            </button>
           ) : (
-            <div className="relative top-1 min-h-48">
+            <RefreshButton className="min-h-48">
               <p className="text-xl">Context Value: {value}</p>
-              <div className="absolute top-1 right-2">
-                <button
-                  className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => {}}
-                >
-                  <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                </button>
-              </div>
-            </div>
+            </RefreshButton>
           )}
-        </div>
+        </CodePreview>
       </div>
     </div>
   );

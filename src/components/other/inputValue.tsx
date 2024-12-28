@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CodeSnippets from "../CodeSnippets";
 import { IoIosRefresh } from "react-icons/io";
+import CodePreview, { RefreshButton } from "../PreviewBox";
 
 const InputValue = () => {
   const [preview, setPreview] = useState<boolean>(false);
@@ -9,7 +10,7 @@ const InputValue = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">React Input Value</h1>
-      <p className="text-xl mb-4 w-[80%]">
+      <p className="text-xl mb-4 ">
         Managing the value of an input field in React involves controlling and
         updating the input’s value through state. This allows you to capture
         user input and use it within your application, typically in forms or
@@ -52,18 +53,17 @@ function InputValueComponent() {
 export default InputValueComponent;
 `}
         />
-        <div className="col-span-1 p-2 bg-gray-400 rounded-lg mt-5">
+
+        <CodePreview className="mt-5">
           {!preview ? (
-            <div className="space-x-3 mt-4">
-              <button
-                className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                onClick={() => setPreview(true)}
-              >
-                Preview of code
-              </button>
-            </div>
+            <button
+              className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
+              onClick={() => setPreview(true)}
+            >
+              Preview of code
+            </button>
           ) : (
-            <div className="relative top-1">
+            <RefreshButton onClick={() => setValue("")}>
               <div className="flex flex-col gap-2">
                 <input
                   type="text"
@@ -73,17 +73,9 @@ export default InputValueComponent;
                 />
                 <p className="text-xl">Current Value: {value}</p>
               </div>
-              <div className="absolute top-1 right-2   ">
-                <button
-                  className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => setValue("")}
-                >
-                  <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                </button>
-              </div>
-            </div>
+            </RefreshButton>
           )}
-        </div>
+        </CodePreview>
       </div>
     </div>
   );

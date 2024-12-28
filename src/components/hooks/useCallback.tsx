@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import CodeSnippets from "../CodeSnippets";
-import { IoIosRefresh } from "react-icons/io";
+import { RefreshButton, Span } from "../PreviewBox";
 
 const UseCallback = () => {
   const [preview, setPreview] = useState(false);
@@ -18,24 +18,26 @@ const UseCallback = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">React useCallback Hook</h1>
-      <p className="text-xl mb-4 w-[80%]">
-        The React <span className="text-red-500">useCallback</span> Hook returns
-        a memoized version of the callback function that only changes if one of
-        the dependencies has changed. It helps optimize performance by
-        preventing unnecessary re-renders of components that rely on the
-        callback function.
+
+      <p className="text-xl mb-4 ">
+        The React <Span>useCallback</Span> Hook returns a memoized version of
+        the callback function that only changes if one of the dependencies has
+        changed. It helps optimize performance by preventing unnecessary
+        re-renders of components that rely on the callback function.
       </p>
+
       <p className="text-lg font-bold mb-2">Import useCallback:</p>
+
       <CodeSnippets
         codeString={` import { useCallback } from "react"`}
         showLineNumbers={false}
       />
+
       <div className="bg-gray-200 rounded-lg py-4 mb-4">
         <h2 className="text-lg font-bold mb-2">Example:</h2>
         <p className="mb-2 text-lg">
-          To use the <span className="text-red-500">useCallback</span> Hook,
-          wrap your callback function in{" "}
-          <span className="text-red-500">useCallback()</span>
+          To use the <Span>useCallback</Span> Hook, wrap your callback function
+          in <Span>useCallback()</Span>
           and provide a dependency array.
         </p>
         <CodeSnippets
@@ -69,6 +71,7 @@ function ParentComponent() {
 export default ParentComponent;
 `}
         />
+
         <div className="col-span-1 p-2 bg-gray-400 rounded-lg my-5">
           {!preview ? (
             <div>
@@ -77,7 +80,8 @@ export default ParentComponent;
               </span>
               <div className="space-x-3 mt-4">
                 <input
-                  type="tel"
+                  type="number"
+                  value={count}
                   onChange={(e) => setCount(Number(e.target.value))}
                   className="p-2 rounded-md hover:shadow-md outline-none"
                 />
@@ -90,41 +94,39 @@ export default ParentComponent;
               </div>
             </div>
           ) : (
-            <div className="relative top-1">
-              <button
-                className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                onClick={increment}
-              >
-                You pressed me {count} times
-              </button>
-              <button
-                className="ml-3 bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                onClick={addTodo}
-              >
-                Add Todo
-              </button>
-              <div className="mt-4">
-                {todos.length > 0 && (
-                  <>
-                    <h2 className="text-xl font-bold">Todos:</h2>
-                    {todos.map((todo, index) => (
-                      <p key={index}>{todo}</p>
-                    ))}
-                  </>
-                )}
-              </div>
-              <div className="absolute top-1 right-2">
+            <RefreshButton
+              onClick={() => {
+                setCount(0);
+                setTodos([]);
+              }}
+            >
+              <>
                 <button
                   className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                  onClick={() => {
-                    setCount(0);
-                    setTodos([]);
-                  }}
+                  onClick={increment}
                 >
-                  <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
+                  You pressed me {count} times
                 </button>
-              </div>
-            </div>
+
+                <button
+                  className="ml-3 bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
+                  onClick={addTodo}
+                >
+                  Add Todo
+                </button>
+
+                <div className="mt-4">
+                  {todos.length > 0 && (
+                    <>
+                      <h2 className="text-xl font-bold">Todos:</h2>
+                      {todos.map((todo, index) => (
+                        <p key={index}>{todo}</p>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </>
+            </RefreshButton>
           )}
         </div>
       </div>

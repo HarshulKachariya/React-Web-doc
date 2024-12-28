@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CodeSnippets from "../CodeSnippets";
-import { IoIosRefresh } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
+import CodePreview, { RefreshButton, Span } from "../PreviewBox";
 
 const UseEffect = () => {
   const [preview, setPreview] = useState<boolean>(false);
@@ -18,16 +18,13 @@ const UseEffect = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4 text-[#282c34]">
-        React useEffect Hook
-      </h1>
-      <p className="text-xl text-gray-600 mb-4 w-[80%]">
-        The React <span className="text-red-500">useEffect</span> Hook allows
-        you to perform side effects in your function components. Some examples
-        of side effects are: fetching data, directly updating the DOM, and
-        timers.
+      <h1 className="title">React useEffect Hook</h1>
+      <p className="text-xl text-gray-600 mb-4 ">
+        The React <Span>useEffect</Span> Hook allows you to perform side effects
+        in your function components. Some examples of side effects are: fetching
+        data, directly updating the DOM, and timers.
       </p>
-      <p className="text-3xl text-[#282c34] font-bold mb-2">
+      <p className="text-2xl text-[#282c34] font-bold mb-2">
         Import useEffect :
       </p>
       <CodeSnippets
@@ -35,16 +32,15 @@ const UseEffect = () => {
         showLineNumbers={false}
       />
       <div className="bg-gray-200 rounded-lg py-4 mb-4">
-        <h2 className="text-3xl text-[#282c34] font-bold mb-2">Example:</h2>
+        <h2 className="text-2xl text-[#282c34] font-bold mb-2">Example:</h2>
         <p className="mb-2 text-xl text-gray-600">
-          At the top of your component,{" "}
-          <span className="text-red-500">import</span> the
-          <span className="text-red-500"> useEffect</span> Hook.
+          At the top of your component, <Span>import</Span> the
+          <Span> useEffect</Span> Hook.
         </p>
         <p className="mb-2 text-xl text-gray-600">
           Then, call the Hook inside your component function with an
-          <span className="text-red-500">effect</span> function as an argument.{" "}
-          <br /> Example with the without dependency
+          <Span>effect</Span> function as an argument. <br /> Example with the
+          without dependency
         </p>
 
         <div className="flex flex-col gap-3">
@@ -78,7 +74,12 @@ function ExampleComponent() {
                 </button>
               </div>
             ) : (
-              <div className="relative top-1">
+              <RefreshButton
+                onClick={() => {
+                  setCount(0);
+                  setPreview(false);
+                }}
+              >
                 <div className="flex flex-col gap-2">
                   <strong className="text-2xl ">{`I've rendered ${count} times!`}</strong>
                   <button
@@ -89,18 +90,7 @@ function ExampleComponent() {
                     {!stop ? "Stop" : "resume"}
                   </button>
                 </div>
-                <div className="absolute top-1 right-2   ">
-                  <button
-                    className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                    onClick={() => {
-                      setCount(0);
-                      setPreview(false);
-                    }}
-                  >
-                    <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                  </button>
-                </div>
-              </div>
+              </RefreshButton>
             )}
           </div>
         </div>
@@ -131,7 +121,7 @@ function ExampleComponent() {
 `}
           />
 
-          <div className="col-span-1 p-2 bg-gray-400 rounded-lg ">
+          <CodePreview>
             {!preview ? (
               <div>
                 <div className="space-x-3 ">
@@ -144,7 +134,7 @@ function ExampleComponent() {
                 </div>
               </div>
             ) : (
-              <div className="relative top-1">
+              <RefreshButton onClick={() => setCount2(0)}>
                 <div className="flex flex-col gap-2">
                   <strong className="text-2xl ">{`I've rendered ${count2} times!`}</strong>
                   <button
@@ -154,17 +144,9 @@ function ExampleComponent() {
                     <FaPlus className="text-xl text-white " />
                   </button>
                 </div>
-                <div className="absolute top-1 right-2   ">
-                  <button
-                    className="bg-[#282c34] p-2 rounded-md hover:shadow-md text-white"
-                    onClick={() => setCount2(0)}
-                  >
-                    <IoIosRefresh className="text-xl text-white hover:transition-all hover:duration-1000 hover:rotate-180 " />
-                  </button>
-                </div>
-              </div>
+              </RefreshButton>
             )}
-          </div>
+          </CodePreview>
         </div>
       </div>
     </div>

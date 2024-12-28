@@ -1,6 +1,7 @@
 import CodeSnippets from "../CodeSnippets";
 
 import viteApp from "../../assets/react_create_vite_app.png";
+import { Span } from "../PreviewBox";
 
 const CreateViteApp = () => {
   return (
@@ -60,8 +61,7 @@ const CreateViteApp = () => {
             commands:
           </p>
           <div className="text-xl">
-            <span className="text-red-500">npm run dev</span> or{" "}
-            <span className="text-red-500">yarn run dev</span>
+            <Span>npm run dev</Span> or <Span>yarn run dev</Span>
           </div>
         </div>
         <p className="text-gray-700 my-4 text-xl">
